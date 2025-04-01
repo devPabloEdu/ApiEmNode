@@ -8,9 +8,11 @@ app.use(express.json());  // Middleware para analisar JSON no corpo das requisi√
 app.use(express.urlencoded({ extended: true }));
 
 //carregar as rotas
-const index = require('./routes/index');
-const product = require('./routes/product');
+const index = require('./routes/indexRoute');
+const product = require('./routes/productRoute');
+const user = require('./routes/userRoute');
 app.use('/', index);
 app.use('/Products', product);
+app.use('/Users', user);
 
 module.exports = app;
