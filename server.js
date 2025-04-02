@@ -4,7 +4,7 @@ const http = require('http');
 const express = require('express');
 const debug = require('debug')('nodestr:server');
 const app = require("./src/app");
-const db = require('./config/db');
+const db = require('./src/config/db');
 
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port); //define a key port com o value port, que pode ser referenciado depois dentro do código

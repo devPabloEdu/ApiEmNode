@@ -31,3 +31,4 @@ async function connect() {
 };
 
 connect();
+module.exports = connect();
