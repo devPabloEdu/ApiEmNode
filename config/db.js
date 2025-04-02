@@ -4,7 +4,7 @@
 require('dotenv').config();
 
 async function connect() {
-
+    //verifica se já existe alguma conexão em aberto
     if(global.connection) {return global.connection.connect()};
 
     //importa a classe Pool da biblioteca pg
