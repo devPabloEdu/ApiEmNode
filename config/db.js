@@ -5,6 +5,8 @@ require('dotenv').config();
 
 async function connect() {
 
+    if(global.connection) {return global.connection.connect()};
+
     //importa a classe Pool da biblioteca pg
     const { Pool } = require('pg');
     //Instancia um pool passando a variavel de ambiente conncetionString
@@ -15,13 +17,16 @@ async function connect() {
     const client = await pool.connect();
 
     //teste de conexão, retorna a hora exata
-    const testePool = pool.query('select now()');
-    console.log((await testePool).rows[0]);
+    const testePool = await client.query('select now()');
+    console.log(testePool.rows[0]);
 
     console.log("conectado com sucesso");
 
-
     client.release();
+
+    //armazena o pool de conexão em uma variavel de escopo global
+    global.connection = pool;
+
     return pool.connect();
 };
 
