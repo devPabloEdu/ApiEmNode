@@ -10,34 +10,26 @@ exports.get = async (req, res, next) => {
     res.status(200).send(productsList);
 };
 
+exports.getById = async (req, res, next) => {
+    const productById = await productModel.getProductById(req.params.productId);
+    res.status(200).send(productById);
+};
+
 exports.post = (req, res, next) => {
     const { productName, productPrice } = req.body;
     const newProduct = productModel.createProduct(productName, productPrice);
     res.status(201).send(req.body);
 };
 
-exports.put = (req, res, next) => {
-    const id = parseInt(req.params.id);
-    if (!id) {
-        return res.status(400).send({
-            error: "o campo não pode ser vazio"
-        });
-    };
-    res.status(201).send({
-        id: id,
-        item: req.body
-    });
+exports.delete = async (req, res, next) => {
+    await productModel.deleteProduct(req.params.productId);
+    res.status(204).send({ message: "Produto deletado com sucesso" });
 };
 
-exports.delete = (req, res, next) => {
-    const id = parseInt(req.params.id);
-    if (!id) {
-        return res.status(400).send({
-            error: "O campo não pode ser Nullo ou vazio"
-        });
-    };
-    res.status(204).send({
-        id: id,
-        removed: res.body
-    });
+exports.put = async (req, res, next) => {
+    const { productName, productPrice } = req.body;
+    const productId = req.params.productId;
+    const updateNewProduct = await productModel.updateProduct(productId, productName, productPrice);
+    res.status(201).json(updateNewProduct);
 };
+
