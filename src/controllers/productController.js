@@ -4,6 +4,13 @@ const express = require('express');
 const http = require('http');
 const router = express.Router();
 
+exports.get = (req, res, next) => {
+    res.status(200).send({
+        produto: "maquina de lavar",
+        preco: "30,00"
+    });
+};
+
 exports.post = (req, res, next) => {
     res.status(201).send(req.body);
 };
