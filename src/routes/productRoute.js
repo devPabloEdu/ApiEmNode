@@ -19,4 +19,10 @@ router.put("/Edit/:productId", productControllers.put);
 //rota para deletar um produto existente
 router.delete('/Remove/:productId', productControllers.delete);
 
+//Rota para filtrar por preco
+router.get('/FiltredByPrice', productControllers.productsByPrice);
+
+//Buscando pelo nome
+router.get('/FiltredByLetter', productControllers.productsByLetter);
+
 module.exports = router;
