@@ -48,7 +48,6 @@ const productModel = {
         const client = await global.connection.connect();
         const listByLetter = await client.query('SELECT * FROM product WHERE productName ILIKE ($1)', [`%${productName}%`]);
         client.release();
-        console.log(listByLetter.rows);
         return listByLetter.rows;
     }
 };
